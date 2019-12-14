@@ -130,4 +130,8 @@ public class Pays{
 	System.out.println(this);
     }
 
+    public void afficheNomPays(){
+	System.out.println(nom);
+    }
+
 }
