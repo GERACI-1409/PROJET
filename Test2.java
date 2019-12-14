@@ -3,6 +3,7 @@ import chambre.*;
 public class Test2{
     public static void main(String[] args){
 	Hotel h = new Hotel(5,3,1,1, "BBH");
+	System.out.println("");
 	// Simple[] etage1= h.getEtageSimple();
 	
 	// for(Simple s: etage1){
