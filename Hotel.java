@@ -157,6 +157,56 @@ public class Hotel{
 	return c;
     }
 
+    public Client NouveauClientv2(){
+	//Demander les infos
+	Scanner scan = new Scanner(System.in);	
+	System.out.println("Veuillez entrer votre:\nnom:");
+	String n = scan.nextLine();
+	System.out.println("Prenom:");
+	String p = scan.nextLine();
+
+	LocalDateTime date_naiss = null;
+	while(date_naiss == null){
+	    System.out.println("Entrez votre date de naissance sous le format aaaa/mm/jj");
+	    String d = scan.nextLine();
+	    date_naiss = obtenirDate(d);
+	}
+	Client c = Client(n, p, date_naiss);
+	
+	
+	//Faire choisir le client dans la liste de pays
+	System.out.println("Votre pays est-il dans la liste ?\n Si oui entrez le numéro correspondant\nSi non entrez -1")
+	for(int i = 0; i < mes_pays.length;i++){
+	    System.out.println(""+i+": "+mes_pays.getNom());
+	}
+	int numero_pays = scan.nextInt();
+	if(numero_pays == -1){
+
+
+	}
+	else{
+	    System.out.println("Entrez le nom de votre pays:");
+	    String pa = scan.nextLine();
+	    Pays pays = new Pays(pa);
+	}
+	
+	
+	//Demander l'email tant qu'il est pas bon
+	boolean valide = false;
+	while(!valide){
+	    System.out.println("Entrez une adresse mail valide");
+	    String email = scan.nextLine();
+	    valide = c.setEmail(email); 
+	}
+
+
+	
+	//Demander le numero tant qu'il est pas bon
+	//idem date debut
+	//idem date fin
+
+    }
+
     public int faireSpa(){
 	Scanner s = new Scanner(System.in);
 	System.out.println("\n Quel est votre numero de chambre ?");
@@ -305,7 +355,7 @@ public class Hotel{
 
     public LocalDateTime obtenirDate(String chaine){
 	String[] date = chaine.split("/");
-	
+	if(date.length != 3 || date[0].length() != 4 || date[1].length() > 2 || date[2].length() >2) return null;
 	int a = Integer.parseInt(date[0]);
 	int m = Integer.parseInt(date[1]);
 	int j = Integer.parseInt(date[2]);
