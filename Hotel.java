@@ -45,6 +45,8 @@ public class Hotel{
 	    etage_triple[i] = new Triple();
 	}
 	liste_clients = new ArrayList<Client>();
+	mes_pays = new ArrayList<Pays>();
+
     }
 
     ///////////////////////////////////////////////////////
@@ -115,7 +117,7 @@ public class Hotel{
 		reserverChambre();
 	    }
 	    if(res == 2){
-		NouveauClient();
+		NouveauClientv2();
 	    }
 	    if(res == 3){
 		imprimerTicket();
@@ -171,39 +173,48 @@ public class Hotel{
 	    String d = scan.nextLine();
 	    date_naiss = obtenirDate(d);
 	}
-	Client c = Client(n, p, date_naiss);
+	Client c = new Client(n, p, date_naiss);
 	
 	
 	//Faire choisir le client dans la liste de pays
-	System.out.println("Votre pays est-il dans la liste ?\n Si oui entrez le numéro correspondant\nSi non entrez -1")
-	for(int i = 0; i < mes_pays.length;i++){
-	    System.out.println(""+i+": "+mes_pays.getNom());
+	System.out.println("Votre pays est-il dans la liste ?\n Si oui entrez le numéro correspondant\nSi non entrez -1");
+	initialisationPays();
+	for(int i = 0; i < mes_pays.size();i++){
+	    System.out.println(""+i+": "+mes_pays.get(i).getNom());
 	}
 	int numero_pays = scan.nextInt();
+	scan.nextLine();
+	Pays pays;
 	if(numero_pays == -1){
-
+	    System.out.println("Entrez le nom de votre pays");
+	    String nom_pays = scan.nextLine();
+	    pays = new Pays(nom_pays);
 
 	}
 	else{
-	    System.out.println("Entrez le nom de votre pays:");
-	    String pa = scan.nextLine();
-	    Pays pays = new Pays(pa);
+	    pays = mes_pays.get(numero_pays); 
 	}
 	
 	
 	//Demander l'email tant qu'il est pas bon
-	boolean valide = false;
-	while(!valide){
+	boolean valide_1 = false;
+	while(!valide_1){
 	    System.out.println("Entrez une adresse mail valide");
 	    String email = scan.nextLine();
-	    valide = c.setEmail(email); 
+	    valide_1 = c.setEmail(email); 
 	}
 
 
 	
 	//Demander le numero tant qu'il est pas bon
-	//idem date debut
-	//idem date fin
+	boolean valide_2 = false;
+	while(!valide_2){
+	    System.out.println("Entrez votre numéro de téléphone");
+	    String num = scan.nextLine();
+	    valide_2 = c.setNumero(num, pays);
+	}
+	liste_clients.add(c);
+	return c;
 
     }
 
@@ -413,7 +424,7 @@ public class Hotel{
 	Chambre c = trouveChambre(numero_chambre);
 	LocalDateTime date_resa = obtenirDate(date);
 	c.imprimeTicket(date_resa);
-;
+
     }
 
     public Chambre trouveChambre(int i){
