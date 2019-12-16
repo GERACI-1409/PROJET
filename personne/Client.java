@@ -22,6 +22,8 @@ public class Client extends Personne{
     /* *tableau du nombre de massage effectues*/
     private int[] tableau_massage;
 
+   
+
     
     ////////////////
     // Constructeurs
@@ -37,11 +39,21 @@ public class Client extends Personne{
 
 	tableau_massage[0] = 0;
 	tableau_massage[1] = 0;
-	tableau_massage[2] = 0;	
+	tableau_massage[2] = 0;
+
+	nb_ticket_restau = 0;
     }
 
     public Client(String nom, String prenom, LocalDateTime naissance){
 	super(nom,prenom,naissance);
+
+	tableau_massage = new int[3];
+
+	tableau_massage[0] = 0;
+	tableau_massage[1] = 0;
+	tableau_massage[2] = 0;
+
+	nb_ticket_restau = 0;
     }
     
 
@@ -159,6 +171,7 @@ public class Client extends Personne{
     }
 
     public void ajouterUnMassage(int num_massage){
+	if(tableau_massage == null) System.out.println(".........");
 	tableau_massage[num_massage-1] = tableau_massage[num_massage-1]+1;
     }
 

@@ -115,6 +115,7 @@ public class Hotel{
 	    if(res == 1){
        
 		reserverChambre();
+		
 	    }
 	    if(res == 2){
 		NouveauClientv2();
@@ -254,25 +255,32 @@ public class Hotel{
 	    //String date2 = s.nextLine();
 	    //LocalDateTime date3 = obtenirDate(date2);
 	    Reservation r = c1.trouveReservation(date_reservation);
-	    Client vrai_client = null;
+	    Client vrai_client;
 	    if(r != null){
 	        vrai_client = r.trouveClient(mail); 
 		
 	    }else{
 		System.out.println("numero ou date invalide");
+		vrai_client = null;
 	    }
 
-	
+	    if(vrai_client == null) return 1;
+	    else{
        
-	    System.out.println("Voulez vous afficher le descriptif des massages ?");
-	    System.out.println("1: oui");
-	    System.out.println("2: non");
-	    int choix_desc = s.nextInt();
-	    if(choix_desc == 1) Spa.affichePrix();
-	    Spa.afficheMenuSpa();
-	    int choix_massage = s.nextInt();
-	    vrai_client.ajouterUnMassage(choix_massage);
-	     //retrouver le vrai client///
+		System.out.println("Voulez vous afficher le descriptif des massages ?");
+		System.out.println("1: oui");
+		System.out.println("2: non");
+		int choix_desc = s.nextInt();
+		s.nextLine();
+		if(choix_desc == 1) Spa.affichePrix();
+		Spa.afficheMenuSpa();
+		int choix_massage = s.nextInt();
+		s.nextLine();
+		System.out.println(vrai_client);
+
+		vrai_client.ajouterUnMassage(choix_massage);
+
+	    }
 	 
 	}
 	return 1;
@@ -358,7 +366,7 @@ public class Hotel{
 	    i=i+1;
 	}
 
-
+	r.attribueTicket();
     
     
     }
