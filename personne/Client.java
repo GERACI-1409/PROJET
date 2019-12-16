@@ -34,6 +34,10 @@ public class Client extends Personne{
 	setEmail(email);
 	setNumero(numero, p);
 	tableau_massage = new int[3];
+
+	tableau_massage[0] = 0;
+	tableau_massage[1] = 0;
+	tableau_massage[2] = 0;	
     }
 
     public Client(String nom, String prenom, LocalDateTime naissance){
@@ -105,19 +109,22 @@ public class Client extends Personne{
     /**
      * Modifie l'email du client
      */
-    public void setEmail(String email){
+    public boolean setEmail(String email){
 	if(email.indexOf("@") > 0){
 		String[] tmp = email.split("@");
 		if(tmp[1].contains(".")){
 		    this.email = email;
 		    System.err.println("Adresse valide.");
+		    return true;
 		}
 		else{
 		    System.err.println("Adresse invalide: rentrez une nouvelle adresse.");
+		    return false;
 		}
 	    }
 	    else{
 		System.err.println("Adresse invalide: rentrez une nouvelle adresse.");
+		return false;
 	    }
     }
 
@@ -125,7 +132,7 @@ public class Client extends Personne{
     /**
      * Modifie le numero du client
      */
-	public void setNumero(String num, Pays p){
+	public boolean setNumero(String num, Pays p){
 	    int code = p.getCode();
 	    if(num.length() <=10 ){
 		if(code == -1){
@@ -134,7 +141,9 @@ public class Client extends Personne{
 		else{
 		    numero = "+"+code+num.substring(1);
 		}
+		return true;
 	    }
+	    return false;
 	}
 
     public String toString(){
