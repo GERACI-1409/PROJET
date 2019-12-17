@@ -220,5 +220,19 @@ public class Client extends Personne{
 	System.out.println( "\n" + l1 + "\n" + l2_a + "    "+ l2_b + "\n" + l3);
 
     }
+
+    public String sauv(){
+	String data = "";
+	data +="u#" + nom + "\n";
+	data +="p#"+ prenom +"\n";
+	data +="pa#"+ pays +"\n";
+	data +="e#"+ email +"\n";
+	data +="num#"+ numero +"\n";
+	data +="tot#"+ nb_ticket_sorti +"\n";
+	data +="sor#"+ nb_ticket_restau +"\n";
+	data +="m#"+ tableau_massage[0]+ tableau_massage[1] + tableau_massage[2] +"\n";
+	data +="sup#"+ supplement+"\n";
+	return data;
+    }
     
 }
