@@ -19,8 +19,14 @@ public class Client extends Personne{
     /* *nombre de ticket de 5euros*/
     private int nb_ticket_restau;
 
+    /* *nombre de ticket sortis*/
+    private int nb_ticket_sorti;
+    
     /* *tableau du nombre de massage effectues*/
     private int[] tableau_massage;
+
+    /* *Supplement du restaurant */
+    private double supplement;
 
    
 
@@ -140,23 +146,26 @@ public class Client extends Personne{
 	    }
     }
 
+    public void setSortis(int n){
+	nb_ticket_sorti = n;
+    }
 
     /**
      * Modifie le numero du client
      */
-	public boolean setNumero(String num, Pays p){
-	    int code = p.getCode();
-	    if(num.length() <=10 ){
-		if(code == -1){
-		    numero = num;
-		}
-		else{
-		    numero = "+"+code+num.substring(1);
-		}
-		return true;
+    public boolean setNumero(String num, Pays p){
+	int code = p.getCode();
+	if(num.length() <=10 ){
+	    if(code == -1){
+		numero = num;
 	    }
-	    return false;
+	    else{
+		numero = "+"+code+num.substring(1);
+	    }
+	    return true;
 	}
+	return false;
+    }
 
     public String toString(){
 	String l1 = "Nom et prenom du client : " + nom + " "+prenom;
@@ -168,6 +177,13 @@ public class Client extends Personne{
     public String pe(){
 	return ""+nom+" "+prenom;
 
+    }
+
+    public void modificationRepas(double prix){
+	nb_ticket_restau = nb_ticket_restau - 1;
+	double ecart = prix - 5;
+	supplement +=ecart;
+	
     }
 
     public void ajouterUnMassage(int num_massage){
@@ -193,6 +209,16 @@ public class Client extends Personne{
 	System.out.println("Nombre Massage aux pierres chaudes : " + deux +" x 70€ = " + somme_deux);
 	System.out.println("Nombre Massage à l'élixir de bougie : "+ trois + " x 80€ = " + somme_trois);
 	System.out.println("Total des massages à payer : " + total + " €");
+    }
+
+
+    public void afficheRestaurant(){
+	String l1 = "Restaurant Mojito-Mojito";
+	String l2_a = "Nombre de tickets sortis: " + nb_ticket_sorti;
+	String l2_b = "Nombre de tickets utilisés: " + (nb_ticket_sorti-nb_ticket_restau);
+	String l3 = "Total des suppléments à payer: " + supplement;
+	System.out.println( "\n" + l1 + "\n" + l2_a + "    "+ l2_b + "\n" + l3);
+
     }
     
 }

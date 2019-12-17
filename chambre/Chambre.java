@@ -66,6 +66,8 @@ public class Chambre{
 	System.out.println( l1+"\n\n\n"  + l2+"\n\n\n"+l3+"\n\n\n"+l4+"\n\n\n");
 	    
 	c.afficheOption();
+	c.afficheRestaurant();
+	System.out.println("*****************************************************************");
     }
 
     public String toString(){

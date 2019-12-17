@@ -78,6 +78,7 @@ public class Reservation{
 	for(int i = 0; i <clients.length ;i++){
 	    if(clients[i] != null){
 		clients[i].setNbTicketRestau(n);
+		clients[i].setSortis(n);
 		    }
 	}
     }

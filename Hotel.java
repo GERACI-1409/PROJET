@@ -124,7 +124,7 @@ public class Hotel{
 		imprimerTicket();
 	    }
 	    if(res == 4){
-		//A coder
+		faireRestaurant();
 	    }
 	    if(res == 5){
 		faireSpa();
@@ -132,7 +132,7 @@ public class Hotel{
 	    
 	}while(res !=0);
     }
-
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Client NouveauClient(){
 	Scanner scan = new Scanner(System.in);	
 	System.out.println("Veuillez entrer votre:\nnom:");
@@ -159,7 +159,7 @@ public class Hotel{
 	liste_clients.add(c);
 	return c;
     }
-
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Client NouveauClientv2(){
 	//Demander les infos
 	Scanner scan = new Scanner(System.in);	
@@ -218,7 +218,7 @@ public class Hotel{
 	return c;
 
     }
-
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
     public int faireSpa(){
 	Scanner s = new Scanner(System.in);
 	System.out.println("\n Quel est votre numero de chambre ?");
@@ -286,7 +286,7 @@ public class Hotel{
 	return 1;
     }
 
-
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void afficheClients(){
 	String s = "";
 	for(int i = 0; i < liste_clients.size(); i++){
@@ -298,7 +298,7 @@ public class Hotel{
 	}
 
     }
-
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void reserverChambre(){
 
 	Scanner sc = new Scanner(System.in);
@@ -371,7 +371,7 @@ public class Hotel{
     
     }
 
-
+    ///////////////////////////////////////////////////////////////////////////////////
     public LocalDateTime obtenirDate(String chaine){
 	String[] date = chaine.split("/");
 	if(date.length != 3 || date[0].length() != 4 || date[1].length() > 2 || date[2].length() >2) return null;
@@ -382,7 +382,7 @@ public class Hotel{
 	LocalDateTime l = LocalDateTime.of(a,m,j,0,0);
 	return l;
     }
-
+    /////////////////////////////////////////////////////////////////////////////////////
     public Chambre reservable(Chambre[] tab, Reservation r){
 	int n = tab.length;
 	int i = -1;
@@ -402,7 +402,7 @@ public class Hotel{
 	    return null;
 	}
     }
-
+    /////////////////////////////////////////////////////////////////////////////////////
     public Client faireClient(){
 	Scanner sc = new Scanner(System.in);
 	System.out.println("Etes vous dans le fichier client ?\n1: oui \n2: non");
@@ -420,7 +420,7 @@ public class Hotel{
 
 	return c;
     }
-
+    /////////////////////////////////////////////////////////////////////////////////////
     public void imprimerTicket(){
 	Scanner sc = new Scanner(System.in);
 	System.out.println("Quel est votre numéro de chambre ?");
@@ -434,7 +434,7 @@ public class Hotel{
 	c.imprimeTicket(date_resa);
 
     }
-
+    //////////////////////////////////////////////////////////////////////////////////
     public Chambre trouveChambre(int i){
 	int n = i % 100;
 	int num_etage = i / 100;
@@ -453,6 +453,95 @@ public class Hotel{
 	}
     }
 
+    /////////////////////////////////////////////////////////////////////////////////
+    public void faireRestaurant(){
+	Restaurant r = new Restaurant();
+	// Demande d'info
+	Scanner s = new Scanner(System.in);
+	System.out.println("\n Quel est votre numero de chambre ?");
+	int numero_chambre = s.nextInt();
+	s.nextLine();
+	System.out.println("Quelle est la date de votre début réservation");
+	String d = s.nextLine();
+	LocalDateTime date_reservation = obtenirDate(d);
+	
+	int numero = numero_chambre %100;
+	int etage = numero_chambre/10;
+	
+	System.out.println("\n Quel client etes vous ?");
+	afficheClients();
+	int i = s.nextInt();
+	s.nextLine();
+	Client c = liste_clients.get(i-1);
+	
+	//Affiche carte
+	Carte carte = r.getCarte();
+	System.out.println(carte);
+	
+	//demande s'il veut une formule ou carte
+	System.out.println("Voulez vous commander ?\n1: A la carte\n2: Mojito (plat + boisson)\n3: Daiquiri (plat + accompagnement + boisson) ");
+	int choix = s.nextInt();
+	s.nextLine();
+	double prix = 0;
+	if(choix == 1){ // a la carte
+	    //choix du plat
+	    System.out.println("Voulez vous un plat ?\n1: oui\n2:non");
+	    int n_plat = s.nextInt();
+	    if(n_plat==1){
+		carte.affichePlat();
+		int num_plat = s.nextInt();
+		prix += 5;
+	    }
+	    //choix de l'accompagnement
+	    System.out.println("Voulez vous un accompagnement ?\n1: oui\n2:non");
+	    int n_accompagnement = s.nextInt();
+	    if(n_accompagnement == 1){
+		carte.afficheAccompagnement();
+		int num_accompagnent = s.nextInt();
+		prix +=2;
+	    }
+	    //choix du dessert
+	    System.out.println("Voulez vous un dessert ?\n1: oui\n2:non");
+	    int n_dessert = s.nextInt();
+	    if(n_dessert == 1){
+		carte.afficheAccompagnement();
+		int num_dessert = s.nextInt();
+		prix += 3.50;
+	    }
+
+	    //choix de la boisson
+	    System.out.println("Voulez vous une boisson ?\n1: oui\n2:non");
+	    int n_boisson = s.nextInt();
+	    if(n_boisson == 1){
+		carte.afficheAccompagnement();
+		int num_boisso = s.nextInt();
+		prix += 2;
+	    }
+	    
+	}
+	else if(choix == 2){ // mojito
+	    carte.affichePlat();
+	    int plat = s.nextInt();
+	    carte.afficheBoisson();
+	    int boi = s.nextInt();
+	    
+	    prix += 6;
+	}
+	else{ // daiquiri
+	    carte.affichePlat();
+	    int plat = s.nextInt();
+	    carte.afficheAccompagnement();
+	    int acc = s.nextInt();
+	    carte.afficheBoisson();
+	    int boi = s.nextInt();
+	    prix +=8;
+	}
+	// PAIEMENT //
+	System.out.println("Le prix du repas est de" + "\nEn utilisant un ticket, il vous reste " +( prix - 5)+ "€ a payer, ils sont ajouter à la note");
+	System.out.println("Vous disposez de " + c.getNbTicketRestau()+ "tickets restaurants");
+       
+	c.modificationRepas(prix);
+    }
      
     
 }
