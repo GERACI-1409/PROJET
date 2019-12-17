@@ -17,13 +17,20 @@ public class Chambre{
     protected double prix;
     protected double prix_taxes;
 
+    /** *type de la chambre (simple, double,...) */
     protected String type;
 
+    /** *nombre maximum de client pouvant être dans la chambre */
     public static int nb_client;
 
+    /** *liste des reservations pour la chambre */
     public ArrayList<Reservation> liste_resa;
 
 
+    ///////////////////////////////////////////
+    /////////////// Constructeurs /////////////
+    //////////////////////////////////////////
+    
     public Chambre(int num, double p, int i){
 	this(num,p,i,"autre");
 	
@@ -38,7 +45,10 @@ public class Chambre{
 	liste_resa = new ArrayList<Reservation>();
     }
 
-        
+    ///////////////////////////////////////////
+    /////////////// Geters ////// /////////////
+    //////////////////////////////////////////
+    /** Retourne le numero de la chambre */
     public int getNumero(){
 	return numero;
     }
