@@ -9,12 +9,22 @@ import personne.*;
 
 
 public class Reservation{
-
+    /* *Date de debut de reservation */
     private LocalDateTime debut;
+
+    /* *Date de fin de reservation */
     private LocalDateTime fin;
+
+    /* *duree de la resservation*/
     private int duree;
+
+    /* *liste des clients qui participent à la reservation*/
     private Client[] clients;
 
+
+    //////////////////////////////////////
+    /////////// Constructeurs ///////////
+    /////////////////////////////////////
     public Reservation(LocalDateTime debut, LocalDateTime fin,int nb_client){
 	this.debut = debut;
 	this.fin = fin;
@@ -22,20 +32,62 @@ public class Reservation{
 	calculeDuree();
 
     }
-
+    /////////////////////////////////
     //////////////GETTERS////////////
-
+    /////////////////////////////////
+    
+    /**
+     * Retourne la date de debut de la reservation
+     */
     public LocalDateTime getDebut(){
 	return debut;
     }
 
+    /**
+     * Retourne la date de fin de reservation
+     */
     public LocalDateTime getFin(){
 	return fin;
     }
-
+    
+    /**
+     * Retourne la liste des clients de la resservation
+     */
     public Client[] getClients(){
 	return clients;
     }
+
+    /**
+     * Retourne la duree de la reservation
+     */
+    public int getDuree(){
+	return duree;
+    }
+
+    /////////////////////////////////
+    //////// Setters ///////////////
+    ///////////////////////////////
+
+    /** *Modifie la date de debut de la reservation*/
+    public void setDebut(LocalDateTime d){
+	debut = d;
+    }
+
+    /** *Modifie la date de fin de la reservation*/
+    public void setFin(LocalDateTime f){
+	fin = f;
+    }
+
+    /** *Modifie la duree de la reservation*/
+    public void setDuree(int d){
+	duree = d;
+    }
+
+
+
+
+
+
     ////////////////////////////////
 
 
