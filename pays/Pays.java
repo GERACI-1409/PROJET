@@ -114,7 +114,9 @@ public class Pays{
     // Affichage
     // ***************
 
-
+    /**
+     * Retourne une chaine de caractere qui permet d'identifier le pays
+     */
     public String toString(){
 	String s = "Pays: " + nom + "\nLangue: " + langue + "\nCode: ";
 	if(code != -1){
@@ -125,11 +127,17 @@ public class Pays{
 	}
 	return s;
     }
-    
+
+    /**
+     * Affiche le pays à partir du pays.
+     */
     public void affiche(){
 	System.out.println(this);
     }
 
+    /**
+     * Affiche le nom du pays.
+     */
     public void afficheNomPays(){
 	System.out.println(nom);
     }
