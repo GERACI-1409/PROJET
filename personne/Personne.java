@@ -1,6 +1,8 @@
 package personne;
 
 /**
+ * Personne represente une personne 
+ *
  * @author Geraci Lucas and Tores Julie
  * @version 2019.11.25
  */
@@ -58,6 +60,14 @@ public class Personne{
 	naissance = date;
     }
 
+
+    /**
+     * Modifie l'âge de la personne
+     */
+    public void setAge(int a){
+	age = a;
+    }
+
     // ********************************************
     // Geters
     // ********************************************
@@ -98,7 +108,6 @@ public class Personne{
     /**
      * Retourne les attributs de la personne
      */
-
     public String toString(){
 	String s = "Nom et Prenom: "+nom+", "+prenom;
 	return s;
@@ -107,8 +116,6 @@ public class Personne{
     /** 
      * Methode qui calcule l'age de la personne
      */
-
-
     public void calculeAge(LocalDateTime ajd){
 	Duration duration = Duration.between(naissance, ajd).abs();
 	long duree = duration.toDays();

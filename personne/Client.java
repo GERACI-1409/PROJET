@@ -2,6 +2,8 @@ package personne;
 import pays.*;
 import java.time.LocalDateTime;
 /**
+ * Client est une personne qui va pouvoir être client de l'hotel 
+ *
  * @author Geraci Lucas and Tores Julie  
  * @version 2019.11.25
  */
@@ -31,9 +33,9 @@ public class Client extends Personne{
    
 
     
-    ////////////////
+    ////////////////////////////
     // Constructeurs
-    ////////////////
+    ///////////////////////////
 
     
     public Client(String nom, String prenom, int a, int m, int j, Pays p, String email, String numero){
@@ -68,6 +70,9 @@ public class Client extends Personne{
     // Geters
     //************************************
 
+    /**
+     * Retourne le tableau qui contient le nombre de massage du client
+     */
     public int[] getTableauMassage(){
 	return tableau_massage;
     }
@@ -95,8 +100,25 @@ public class Client extends Personne{
 	return numero;
     }
 
+    /**
+     * Retourne le nombre de ticket restaurant restant du client
+     */
     public int getNbTicketRestau(){
 	return nb_ticket_restau;
+    }
+
+    /**
+     * Retourne les supplements que le client doit payer a cause du restaurant.
+     */
+    public double getSupplement(){
+	return supplement;
+    }
+
+    /**
+     * Retourne le nombre de ticket que le cient a recu au debut.
+     */
+    public int getNbTicketTotal(){
+	return nb_ticket_sorti;
     }
 
     
@@ -146,6 +168,9 @@ public class Client extends Personne{
 	    }
     }
 
+    /**
+     * Modifie le nombre de ticket sortis du client
+     */
     public void setSortis(int n){
 	nb_ticket_sorti = n;
     }
@@ -167,6 +192,20 @@ public class Client extends Personne{
 	return false;
     }
 
+    /**
+     * Modifie les supplements a payer du client.
+     */
+    public void setSupplement(int s){
+	supplement = s;
+    }
+
+    ////////////////////////////////////////////////
+    ////////////////// Autres //////////////////////
+    ///////////////////////////////////////////////
+
+    /**
+     * Retourne une chaine de caractere qui permet d'identifier le client
+     */
     public String toString(){
 	String l1 = "Nom et prenom du client : " + nom + " "+prenom;
 	String l2 = "email : " + email;
@@ -174,28 +213,40 @@ public class Client extends Personne{
 	return l1 + "\n" + l2 + "\n" + l3;
     }
 
+    /**
+     * Retourne une chaine de caractere qui contient le nom et le prenom du client.
+     */
     public String pe(){
 	return ""+nom+" "+prenom;
 
     }
 
+    /**
+     * Modifie le nombre de ticket du client et les supplements que le client doit payer. 
+     */
     public void modificationRepas(double prix){
 	nb_ticket_restau = nb_ticket_restau - 1;
 	double ecart = prix - 5;
-	supplement +=ecart;
-	
+	supplement +=ecart;	
     }
 
+    /**
+     * Ajoute un message dans la case correspondante au massage que le client à fait.
+     */
     public void ajouterUnMassage(int num_massage){
 	if(tableau_massage == null) System.out.println(".........");
 	tableau_massage[num_massage-1] = tableau_massage[num_massage-1]+1;
     }
 
+    
     public void afficheOption(){
 	afficheNombreMassage();
 	///////// A MODIFIER AVEC LE RESTAURANT /////////////
     }
 
+    /**
+     * Affiche le nombre de massage que le client à fait, leur prix, et le total que le client doit payer.
+     */
     public void afficheNombreMassage(){
 	System.out.println("Spa Yuma Massage\n\n");
 	int un =  tableau_massage[0];
@@ -211,7 +262,10 @@ public class Client extends Personne{
 	System.out.println("Total des massages à payer : " + total + " €");
     }
 
-
+    /**
+     * Affiche le nombre de ticket que le client a recu de base, le prix de ce qu'il doit payer en supplement
+     * et le nombre de tickets qui lui reste.
+     */
     public void afficheRestaurant(){
 	String l1 = "Restaurant Mojito-Mojito";
 	String l2_a = "Nombre de tickets sortis: " + nb_ticket_sorti;
@@ -221,6 +275,9 @@ public class Client extends Personne{
 
     }
 
+    /**
+     * Fonction qui permet la sauvegarde d'un client dans un fichier texte.
+     */
     public String sauv(){
 	String data = "";
 	data +="u#" + nom + "\n";
