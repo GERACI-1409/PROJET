@@ -27,7 +27,8 @@ public class Gestionv2{
 	int total = -1;
 	int restant = -1;
 	double supp = -1;
-
+	LocalDateTime date_nai = null;
+	
 	String nom = null;
 	String prenom = null;
 	String email = null;
@@ -39,6 +40,7 @@ public class Gestionv2{
 	String utilise = null;
 	String sup = null;
 	String naissance = null;
+	String d1 = null;
 	while((line = rf.readLine()) != null){
 	    separation = scan.nextLine().split("#");
 	    
@@ -84,19 +86,27 @@ public class Gestionv2{
 		    supp = (double) Integer.parseInt(sup); 
 
 		}
-
-		if(/*ECRIRE LE TEST*/){
-		    c = new Client(nom, prenom, /*naissance*/,email,numero);
-		    c.setSortis(total);
-		    c.setNbTicketRestau(restant);
-		}
 	    }
+	    if(separation[0].equals(" ")){
+		d1 = separation[1];
+		String a = d1.substring(0,4);
+		String m = d1.substring(4,6);
+		String j = d1.substring(6);
+		date_nai = LocalDateTime.of(Integer.parseInt(a),Integer.parseInt(m) ,Integer.parseInt(j) , 0,0);
+	    }
+
+	    if(/*ECRIRE LE TEST*/){
+		c = new Client(nom, prenom, /*naissance*/,email,numero);
+		c.setSortis(total);
+		c.setNbTicketRestau(restant);
+	    }
+	}
 	      
 	   
 
-	}
-
     }
+
+    
 
 
     public void Sauvegarder(String filename) throws FileNotFoundException, IOException{

@@ -1,6 +1,7 @@
 package personne;
 import pays.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 /**
  * Client est une personne qui va pouvoir être client de l'hotel 
  *
@@ -280,15 +281,17 @@ public class Client extends Personne{
      */
     public String sauv(){
 	String data = "";
+	
 	data +="u#" + nom + "\n";
 	data +="p#"+ prenom +"\n";
-	data +="pa#"+ pays +"\n";
+	data +="pa#"+ pays.getNom() +"\n";
 	data +="e#"+ email +"\n";
 	data +="num#"+ numero +"\n";
 	data +="tot#"+ nb_ticket_sorti +"\n";
 	data +="sor#"+ nb_ticket_restau +"\n";
 	data +="m#"+ tableau_massage[0]+ tableau_massage[1] + tableau_massage[2] +"\n";
 	data +="sup#"+ supplement+"\n";
+	data += " #" + naissance.format(DateTimeFormatter.BASIC_ISO_DATE)+"\n";
 	return data;
     }
     
